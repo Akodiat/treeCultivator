@@ -6,6 +6,7 @@ let canvas, renderer;
 
 const scenes = [];
 const meshes = [];
+const genomes = [];
 const popSize = 9;
 
 init();
@@ -69,6 +70,7 @@ function init() {
             trunkLength: 2.4
         });
         genome.mutate();
+        genomes.push(genome);
         const mesh = genome.getMesh();
         meshes.push(mesh);
         scene.add(mesh);
@@ -81,18 +83,7 @@ function init() {
         scenes.push(scene);
 
         element.onmouseup = () => {
-            console.log(genome.properties);
-
-            for (let j=0; j<popSize; j++) {
-                scenes[j].remove(meshes[j]);
-                const child = genome.clone();
-                if (j !== i) {
-                    child.mutate();
-                }
-                const childMesh = child.getMesh();
-                meshes[j] = childMesh;
-                scenes[j].add(childMesh);
-            }
+            newGeneration(i);
         }
     }
 
@@ -103,6 +94,31 @@ function init() {
     renderer.setClearColor(0xffffff, 1);
     renderer.setPixelRatio(window.devicePixelRatio);
 
+}
+
+function newGeneration(index) {
+    const genome = genomes[index];
+    console.log(index);
+    console.log(genome.properties);
+
+    for (let i=0; i<popSize; i++) {
+        // Remove old tree from scene
+        scenes[i].remove(meshes[i]);
+
+        // Create a child
+        const child = genome.clone();
+        genomes[i] = child;
+
+        // Don't change the selected tile
+        // Just make the other tiles this
+        // one's children
+        if (i !== index) {
+            child.mutate();
+        }
+        const childMesh = child.getMesh();
+        meshes[i] = childMesh;
+        scenes[i].add(childMesh);
+    }
 }
 
 function updateSize() {

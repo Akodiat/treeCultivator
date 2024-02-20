@@ -15,7 +15,7 @@ class Genome {
     }
     mutate() {
         for (const property in ranges) {
-            this.properties[property] += gaussianRandom(0, 0.05);
+            this.properties[property] += gaussianRandom(0, 0.02);
             this.properties[property] = THREE.MathUtils.clamp(
                 this.properties[property],
                 ranges[property].min,
