@@ -17,7 +17,7 @@ function init() {
 
     canvas = document.getElementById('c');
 
-    const content = document.getElementById('content');
+    const content = document.getElementById('grid');
 
     for (let i=0; i < popSize; i++) {
         const scene = new THREE.Scene();
@@ -48,7 +48,7 @@ function init() {
         const genome = new Genome({
             seed: 262,
             segments: 6,
-            levels: 5,
+            levels: 2,
             vMultiplier: 2.36,
             twigScale: 0.8,
             initalBranchLength: 0.49,
@@ -100,6 +100,11 @@ function newGeneration(index) {
     const genome = genomes[index];
     console.log(index);
     console.log(genome.properties);
+    const propertyDisplay = document.getElementById("propertyDisplay");
+    propertyDisplay.innerHTML = hljs.highlight(
+        JSON.stringify(genome.properties, undefined, 2).replaceAll('"', ''),
+        {language: 'c'}
+    ).value
 
     for (let i=0; i<popSize; i++) {
         // Remove old tree from scene

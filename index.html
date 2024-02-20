@@ -5,7 +5,10 @@
 
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 
-				<style>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-light.min.css">
+		<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+		<style>
 			* {
 				box-sizing: border-box;
 				-moz-box-sizing: border-box;
@@ -24,7 +27,6 @@
 				position: absolute;
 				top: 0; width: 100%;
 				z-index: 1;
-				padding: 1em 0 0 0;
 			}
 
 			#c {
@@ -63,7 +65,9 @@
 	<body style="margin: 0">
 		<canvas id="c"></canvas>
 		<div id="content">
-			<div class="container-fluid">Select the tree that looks most like what you want.</div>
+			<div class="container">Select the tree that looks most like what you want.</div>
+			<div class="container" id="grid"></div>
+			<pre><code id="propertyDisplay"></code></pre>
 		</div>
 
 		<!-- Import maps polyfill -->
